@@ -9,9 +9,15 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(ament_index_cpp REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
+
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "srv/StringService.srv"
+)
 
 add_executable(talker src/publisher_member_function.cpp)
 ament_target_dependencies(talker rclcpp std_msgs)
@@ -19,10 +25,20 @@ ament_target_dependencies(talker rclcpp std_msgs)
 add_executable(listener src/subscriber_member_function.cpp)
 ament_target_dependencies(listener rclcpp std_msgs)
 
+add_executable(server src/change_string_id_server.cpp)
+ament_target_dependencies(server rclcpp std_msgs)
+
 install(TARGETS
   talker
   listener
+  server
   DESTINATION lib/${PROJECT_NAME})
+
+rosidl_get_typesupport_target(cpp_typesupport_target
+${PROJECT_NAME} "rosidl_typesupport_cpp")
+
+target_link_libraries(server "${cpp_typesupport_target}")
+
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
