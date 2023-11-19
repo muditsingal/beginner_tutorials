@@ -16,6 +16,7 @@
 #include <functional>
 #include <memory>
 #include <string>
+#include <fstream>
 
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
@@ -35,8 +36,29 @@ class MinimalPublisher : public rclcpp::Node {
 
  private:
   void timer_callback() {
+    const std::string pkg_path = "src/beginner_tutorials";
+    // std::string pkg_path = ament_index_cpp::get_package_share_directory("beginner_tutorials");
+    // std::cout<<pkg_path<<std::endl;
+
+
+    std::ifstream in_file(pkg_path + "/data/print_string.txt");
+    std::string file_contents = "Default contents, file not read ";
+
+    if (in_file.is_open()) {
+        std::string read_file_string((std::istreambuf_iterator<char>(in_file)),
+                                  std::istreambuf_iterator<char>());
+
+        // Close the file
+        file_contents = read_file_string;
+        in_file.close();
+    }
+    else {
+        RCLCPP_FATAL_STREAM(rclcpp::get_logger("rclcpp"), "Error opening the file!");
+        return;
+    }
     auto message = std_msgs::msg::String();
-    message.data = "Hello ENPM808X, Software Development for Roboticss! " +
+    std::string file_txt;
+    message.data = "Now printing from file contents: " + file_contents +
                    std::to_string(count_++);
     RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
     publisher_->publish(message);
