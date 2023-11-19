@@ -26,7 +26,10 @@ void handle_service(const std::shared_ptr<beginner_tutorials::srv::StringService
       return;
     }
 
-    const std::string pkg_path = "beginner_tutorials";
+    const std::string pkg_path = "src/beginner_tutorials";
+    // std::string pkg_path = ament_index_cpp::get_package_share_directory("beginner_tutorials");
+    // std::cout<<pkg_path<<std::endl;
+
 
     std::ofstream out_file(pkg_path + "/data/print_string.txt", std::ios::trunc);
 
@@ -36,13 +39,13 @@ void handle_service(const std::shared_ptr<beginner_tutorials::srv::StringService
     }
 
     // Write to the file
-    out_file << "New content for the file." << std::endl;
+    out_file << request->msg_string << std::endl;
 
     // Close the file
     out_file.close();
 
 
-    std::cout << "File overwritten successfully." << std::endl;
+    std::cout << request->msg_string << std::endl;
 
 
 
