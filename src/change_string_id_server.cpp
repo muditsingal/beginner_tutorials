@@ -14,10 +14,18 @@
 #include <fstream>
 #include "beginner_tutorials/srv/string_service.hpp"
 
+/**
+ * @brief Function to handle the service to change string in file
+            print_string.txt
+ *
+ * @param request
+ * @param response
+ */
 void handle_service(const std::shared_ptr<beginner_tutorials::srv::StringService::Request> request,
                      std::shared_ptr<beginner_tutorials::srv::StringService::Response> response)
 {
     RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "The entered string and id are: %s  %d", request->msg_string, request->service_id);
+    RCLCPP_FATAL(rclcpp::get_logger("rclcpp"), "Dummy FATAL error! No need to panic!");
 
     if((request->msg_string).empty())
     {
@@ -52,10 +60,17 @@ void handle_service(const std::shared_ptr<beginner_tutorials::srv::StringService
     response->status = true;
 }
 
+/**
+ * @brief main function to start the string change service
+ *
+ * @param argc
+ * @param argv
+ * @return int
+ */
 int main(int argc, char **argv)
 {
     rclcpp::init(argc, argv);
-    RCLCPP_DEBUG_ONCE(rclcpp::get_logger("rclcpp"), "String change service started!");
+    RCLCPP_DEBUG(rclcpp::get_logger("rclcpp"), "String change service started!");
     auto node = rclcpp::Node::make_shared("string_change_server");
     auto server = node->create_service<beginner_tutorials::srv::StringService>("service_change_string_cntr", &handle_service);
 

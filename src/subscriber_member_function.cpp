@@ -12,6 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/**
+ * @file subscriber_member_function.cpp
+ * @author Mudit Singal (muditsingal@gmail.com)
+ * @brief File to create a subscriber that subscirbes to /beginner_tutorials_ns/topic and prints the last heard message
+ * @version 0.1
+ * @date 2023-11-20
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
 #include <functional>
 #include <memory>
 
@@ -20,6 +31,11 @@
 
 using std::placeholders::_1;
 
+/**
+ * @brief Class to create a subscriber of string messages and print the last
+          received message
+ *
+ */
 class MinimalSubscriber : public rclcpp::Node {
  public:
   MinimalSubscriber() : Node("minimal_subscriber") {

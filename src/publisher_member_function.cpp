@@ -12,6 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
+/**
+ * @file publisher_member_function.cpp
+ * @author Mudit Singal (muditsingal@gmail.com)
+ * @brief File to create a publisher (talker) of a string
+ * @version 0.1
+ * @date 2023-11-20
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
 #include <chrono>
 #include <functional>
 #include <memory>
@@ -61,6 +72,8 @@ class MinimalPublisher : public rclcpp::Node {
     message.data = "Now printing from file contents: " + file_contents +
                    std::to_string(count_++);
     RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
+    RCLCPP_WARN(this->get_logger(), "Dummy Warning from publisher");
+    RCLCPP_FATAL(this->get_logger(), "Dummy FATAL message from publisher");
     publisher_->publish(message);
   }
   rclcpp::TimerBase::SharedPtr timer_;

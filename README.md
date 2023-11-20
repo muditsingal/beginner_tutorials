@@ -3,10 +3,10 @@ ENPM808x ROS2 related assignment repo
 
 ## Overview
 This repo contains the talker and listener nodes and string change service in ROS2 made with C++. <br>
-The *docs* folder contains results for cpp lint and cpp check. <br>
 The source files are: change_string_id_server.cpp _publisher_member_function.cpp_ and _subscriber_member_function.cpp_ <br>
 The string to be printed is present in data/print_string.txt. <br>
-Launch file to launch the service, talker and listener is presetnt in launch folder: talker_listen_srv_launch.py.
+Launch file to launch the service, talker and listener is presetnt in launch folder: talker_listen_srv_launch.py. <br>
+RQT console, cpp lint, and cpp check output is present in *results* folder.
 
 ## Steps to run
 
