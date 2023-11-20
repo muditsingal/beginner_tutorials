@@ -15,6 +15,11 @@ find_package(rosidl_default_generators REQUIRED)
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 
+install(DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}
+)
+
 rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/StringService.srv"
 )
