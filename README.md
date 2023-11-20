@@ -33,9 +33,9 @@ Launch file to launch the service, talker and listener is presetnt in launch fol
 5. In the first terminal the string being published and subscribed will be modified.
 
 ## Dependencies
-> ROS2 Humble
-> rclcpp
-> cpplint
-> cppcheck
-> clang-format
-> colcon
+> ROS2 Humble <br>
+> rclcpp <br>
+> cpplint <br>
+> cppcheck <br>
+> clang-format <br>
+> colcon <br>
