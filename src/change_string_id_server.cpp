@@ -55,6 +55,7 @@ void handle_service(const std::shared_ptr<beginner_tutorials::srv::StringService
 int main(int argc, char **argv)
 {
     rclcpp::init(argc, argv);
+    RCLCPP_DEBUG_ONCE(rclcpp::get_logger("rclcpp"), "String change service started!");
     auto node = rclcpp::Node::make_shared("string_change_server");
     auto server = node->create_service<beginner_tutorials::srv::StringService>("service_change_string_cntr", &handle_service);
 

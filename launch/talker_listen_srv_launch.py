@@ -19,6 +19,10 @@ def generate_launch_description():
       package='beginner_tutorials',
       namespace='beginner_tutorials_ns',
       executable='server',
-      name='server_node'
+      name='server_node',
+      ros_arguments=[
+        "--log-level",
+        "debug"
+      ]
     )
   ])
