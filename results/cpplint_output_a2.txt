@@ -1,0 +1,7 @@
+Skipping input '--output-file=results/cpplint_output_a2.txt': Can't open for reading
+src/change_string_id_server.cpp:27:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+src/change_string_id_server.cpp:74:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+Done processing src/change_string_id_server.cpp
+Done processing src/publisher_member_function.cpp
+Done processing src/subscriber_member_function.cpp
+Total errors found: 2

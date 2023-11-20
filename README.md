@@ -24,7 +24,7 @@ RQT console, cpp lint, and cpp check output is present in *results* folder.
 2. Again launch all the necessary nodes from the launch file by using: `ros2 launch beginner_tutorials talker_listen_srv_launch.py` from the ros2_ws folder.
 3. You should get a FATAL error from ROS.
 
-## Steps to change the underlying published string
+## Steps to call the service to change the underlying published string
 
 1. Make sure a text file: print_string.txt is present in the data folder of the package.
 2. Launch all the necessary nodes from the launch file by using: `ros2 launch beginner_tutorials talker_listen_srv_launch.py` from the ros2_ws folder.

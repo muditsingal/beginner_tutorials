@@ -52,8 +52,10 @@ class MinimalSubscriber : public rclcpp::Node {
 
 int main(int argc, char* argv[]) {
   rclcpp::init(argc, argv);
-  RCLCPP_WARN_ONCE(rclcpp::get_logger("rclcpp"), "Warning! this is from subscriber main function!");
-  RCLCPP_ERROR_ONCE(rclcpp::get_logger("rclcpp"), "This is a DUMMY ERROR! No need to panic!");
+  RCLCPP_WARN_ONCE(rclcpp::get_logger("rclcpp"),
+                            "Warning! this is from subscriber main function!");
+  RCLCPP_ERROR_ONCE(rclcpp::get_logger("rclcpp"),
+                                    "This is a DUMMY ERROR! No need to panic!");
   rclcpp::spin(std::make_shared<MinimalSubscriber>());
   rclcpp::shutdown();
   return 0;
