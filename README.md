@@ -24,6 +24,13 @@ Launch file to launch the service, talker and listener is presetnt in launch fol
 2. Again launch all the necessary nodes from the launch file by using: `ros2 launch beginner_tutorials talker_listen_srv_launch.py` from the ros2_ws folder.
 3. You should get a FATAL error from ROS.
 
+## Steps to change the underlying published string
+
+1. Make sure a text file: print_string.txt is present in the data folder of the package.
+2. Launch all the necessary nodes from the launch file by using: `ros2 launch beginner_tutorials talker_listen_srv_launch.py` from the ros2_ws folder.
+3. From another terminal run `source ~/ros2_ws/install/setup.bash`.
+4. Call the service using the command: `ros2 service call /beginner_tutorials_ns/service_change_string_cntr beginner_tutorials/srv/StringService "{msg_string: '808X assignment 2 service', service_id: 1}"`
+5. In the first terminal the string being published and subscribed will be modified.
 
 ## Dependencies
 > ROS2 Humble
