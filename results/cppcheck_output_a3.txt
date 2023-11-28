@@ -1,0 +1,17 @@
+Checking src/change_string_id_server.cpp ...
+src/change_string_id_server.cpp:74:17: style: Variable 'server' is assigned a value that is never used. [unreadVariable]
+    auto server = node->create_service<beginner_tutorials::srv::StringService>
+                ^
+1/4 files checked 20% done
+Checking src/publisher_member_function.cpp ...
+2/4 files checked 49% done
+Checking src/subscriber_member_function.cpp ...
+3/4 files checked 65% done
+Checking test/test_tf2_broadcaster.cpp ...
+4/4 files checked 100% done
+test/test_tf2_broadcaster.cpp:26:0: style: The function 'SetUp' is never used. [unusedFunction]
+
+^
+test/test_tf2_broadcaster.cpp:42:0: style: The function 'TearDown' is never used. [unusedFunction]
+
+^

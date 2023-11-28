@@ -1,0 +1,10 @@
+./src/change_string_id_server.cpp:27:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+./src/publisher_member_function.cpp:26:  <chrono> is an unapproved C++11 header.  [build/c++11] [5]
+./src/publisher_member_function.cpp:38:  Do not use namespace using-directives.  Use using-declarations instead.  [build/namespaces] [5]
+./test/test_tf2_broadcaster.cpp:66:  If you can, use sizeof(execName) instead of 16 as the 2nd arg to snprintf.  [runtime/printf] [3]
+./test/test_tf2_broadcaster.cpp:117:  Do not use namespace using-directives.  Use using-declarations instead.  [build/namespaces] [5]
+Done processing ./src/change_string_id_server.cpp
+Done processing ./src/publisher_member_function.cpp
+Done processing ./src/subscriber_member_function.cpp
+Done processing ./test/test_tf2_broadcaster.cpp
+Total errors found: 5

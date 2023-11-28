@@ -1,0 +1,24 @@
+Command used: 
+
+	ros2 run tf2_ros tf2_echo talk world
+
+At time 1700939621.530437836
+- Translation: [-0.601, 1.500, 0.000]
+- Rotation: in Quaternion [0.000, 0.000, -0.707, 0.707]
+- Rotation: in RPY (radian) [0.000, 0.000, -1.570]
+- Rotation: in RPY (degree) [0.000, 0.000, -89.954]
+- Matrix:
+  0.001  1.000  0.000 -0.601
+ -1.000  0.001 -0.000  1.500
+ -0.000  0.000  1.000  0.000
+  0.000  0.000  0.000  1.000
+At time 1700939622.530368643
+- Translation: [-0.601, 1.500, 0.000]
+- Rotation: in Quaternion [0.000, 0.000, -0.707, 0.707]
+- Rotation: in RPY (radian) [0.000, 0.000, -1.570]
+- Rotation: in RPY (degree) [0.000, 0.000, -89.954]
+- Matrix:
+  0.001  1.000  0.000 -0.601
+ -1.000  0.001 -0.000  1.500
+ -0.000  0.000  1.000  0.000
+  0.000  0.000  0.000  1.000

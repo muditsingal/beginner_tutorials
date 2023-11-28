@@ -8,11 +8,13 @@
  * @copyright Copyright (c) 2023
  *
  */
-#include "rclcpp/rclcpp.hpp"
+
 #include <ament_index_cpp/get_package_share_directory.hpp>
-#include <string>
 #include <fstream>
+#include <string>
+
 #include "beginner_tutorials/srv/string_service.hpp"
+#include "rclcpp/rclcpp.hpp"
 
 /**
  * @brief Function to handle the service to change string in file
@@ -21,42 +23,43 @@
  * @param request
  * @param response
  */
-void handle_service(const
-    std::shared_ptr<beginner_tutorials::srv::StringService::Request> request,
-    std::shared_ptr<beginner_tutorials::srv::StringService::Response> response)
-{
-    RCLCPP_INFO(rclcpp::get_logger("rclcpp"),
-                                    "The entered string and id are: %s  %d",
-                                    request->msg_string, request->service_id);
+void handle_service(
+    const std::shared_ptr<beginner_tutorials::srv::StringService::Request>
+        request,
+    std::shared_ptr<beginner_tutorials::srv::StringService::Response>
+        response) {
+  RCLCPP_INFO(rclcpp::get_logger("rclcpp"),
+              "The entered string and id are: %s  %d", request->msg_string,
+              request->service_id);
+  RCLCPP_FATAL_STREAM(rclcpp::get_logger("rclcpp"),
+                      "Dummy FATAL error! No need to panic!");
+
+  if ((request->msg_string).empty()) {
+    RCLCPP_WARN_STREAM(
+        rclcpp::get_logger("rclcpp"),
+        "Empty string entered, default string won't be changed!");
+    response->status = false;
+    return;
+  }
+
+  const std::string pkg_path = "src/beginner_tutorials";
+
+  std::ofstream out_file(pkg_path + "/data/print_string.txt", std::ios::trunc);
+
+  if (!out_file.is_open()) {
     RCLCPP_FATAL_STREAM(rclcpp::get_logger("rclcpp"),
-                                    "Dummy FATAL error! No need to panic!");
+                        "Error opening the file!");
+    return;
+  }
+  // Write to the file
+  out_file << request->msg_string << std::endl;
 
-    if ((request->msg_string).empty()) {
-      RCLCPP_WARN_STREAM(rclcpp::get_logger("rclcpp"),
-                    "Empty string entered, default string won't be changed!");
-      response->status = false;
-      return;
-    }
+  // Close the file
+  out_file.close();
 
-    const std::string pkg_path = "src/beginner_tutorials";
+  std::cout << request->msg_string << std::endl;
 
-    std::ofstream out_file(pkg_path + "/data/print_string.txt",
-                                                            std::ios::trunc);
-
-    if (!out_file.is_open()) {
-        RCLCPP_FATAL_STREAM(rclcpp::get_logger("rclcpp"),
-                                                    "Error opening the file!");
-        return;
-    }
-    // Write to the file
-    out_file << request->msg_string << std::endl;
-
-    // Close the file
-    out_file.close();
-
-    std::cout << request->msg_string << std::endl;
-
-    response->status = true;
+  response->status = true;
 }
 
 /**
@@ -67,17 +70,18 @@ void handle_service(const
  * @return int
  */
 int main(int argc, char **argv) {
-    rclcpp::init(argc, argv);
-    RCLCPP_DEBUG_STREAM(rclcpp::get_logger("rclcpp"),
-                                    "String change service started!");
-    auto node = rclcpp::Node::make_shared("string_change_server");
-    auto server = node->create_service<beginner_tutorials::srv::StringService>("service_change_string_cntr", &handle_service);
+  rclcpp::init(argc, argv);
+  RCLCPP_DEBUG_STREAM(rclcpp::get_logger("rclcpp"),
+                      "String change service started!");
+  auto node = rclcpp::Node::make_shared("string_change_server");
+  auto server = node->create_service<beginner_tutorials::srv::StringService>(
+      "service_change_string_cntr", &handle_service);
 
-    RCLCPP_INFO(rclcpp::get_logger("rclcpp"),
-                            "Server for changing talker string and id ready!");
+  RCLCPP_INFO(rclcpp::get_logger("rclcpp"),
+              "Server for changing talker string and id ready!");
 
-    rclcpp::spin(node);
+  rclcpp::spin(node);
 
-    rclcpp::shutdown();
-    return 0;
+  rclcpp::shutdown();
+  return 0;
 }
