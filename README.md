@@ -8,6 +8,7 @@ The string to be printed is present in data/print_string.txt. <br>
 Launch file to launch the service, talker and listener is presetnt in launch folder: talker_listen_srv_launch.py. <br>
 RQT console, cpp lint, and cpp check output is present in *results* folder.
 
+
 ## Steps to run
 
 1. Clone the repo using `git clone https://github.com/muditsingal/beginner_tutorials.git` inside your _ros2\_ws/src_ folder
@@ -17,6 +18,30 @@ RQT console, cpp lint, and cpp check output is present in *results* folder.
 5. Observe that INFO messages are printed indicating successful publishing and subscribing of the string present in data/print_string.txt
 6. You should also get logging for Warning, Error, and DEBUG severities in the package.
 
+## Steps to record rosbag file
+
+1. Make sure that this package is added to your workspace src folder and built successfully.
+2. Launch the relevant nodes for talker, listener, and rosbag recorder using: `ros2 launch beginner_tutorials bringup_and_record_launch.py`.
+3. Terminate and the recording using *Ctrl+C* keypress.
+4. Inspect the bag file using `ros2 bag info rosbag2_<tiemstamp>/`<br>
+
+- To disable rosbag recording: Set *rosbag_record* argument to *False* in *bringup_and_record_launch.py*.
+- To record TF frames: `ros2 run tf2_tools view_frames`
+- To inspect specific frames: `ros2 run tf2_ros tf2_echo world talk`
+
+## Steps to run ROSBAG
+
+1. Make sure that this package is added to your workspace src folder and built successfully.
+2. Source the workspace: `source install/setup.bash`
+3. ros2 run beginner_tutorials listener
+4. ros2 bag play <path/to/rosbag_folder>
+5. Observe the listener.
+
+## Steps to run ROS test
+
+1. `cd <path/to/ros/workspace>`
+2. `source install/setup.bash`
+3. ros2 run beginner_tutorials beginner_tutorials_test
 
 ## Steps to get fatal error logging
 
@@ -31,6 +56,20 @@ RQT console, cpp lint, and cpp check output is present in *results* folder.
 3. From another terminal run `source ~/ros2_ws/install/setup.bash`.
 4. Call the service using the command: `ros2 service call /beginner_tutorials_ns/service_change_string_cntr beginner_tutorials/srv/StringService "{msg_string: '808X assignment 2 service', service_id: 1}"`
 5. In the first terminal the string being published and subscribed will be modified.
+
+## CppLint, CppCheck, and Clangd formattting
+
+```bash
+# Cpp Lint
+cpplint --filter=-build/c++11,+build/c++17,-build/namespaces,-build/include_order --filter="-legal/copyright" $( find . -name *.cpp | grep -vE -e "^./build/" ) &> results/cpplint_output_a3.txt
+
+# Cpp Check
+cppcheck --enable=all --std=c++17 -I include/ --suppress=missingInclude $( find . -name *.cpp | grep -vE -e "^./build/" ) &> results/cppcheck_output_a3.txt
+
+# Clangd format
+clang-format -i --style=Google $(find . -name *.cpp -o -name *.hpp | grep -vE -e "^./build/")
+```
+
 
 ## Dependencies
 > ROS2 Humble <br>

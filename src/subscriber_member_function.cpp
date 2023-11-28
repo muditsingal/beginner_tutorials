@@ -15,7 +15,8 @@
 /**
  * @file subscriber_member_function.cpp
  * @author Mudit Singal (muditsingal@gmail.com)
- * @brief File to create a subscriber that subscirbes to /beginner_tutorials_ns/topic and prints the last heard message
+ * @brief File to create a subscriber that subscirbes to
+ * /beginner_tutorials_ns/topic and prints the last heard message
  * @version 0.1
  * @date 2023-11-20
  *
@@ -40,7 +41,7 @@ class MinimalSubscriber : public rclcpp::Node {
  public:
   MinimalSubscriber() : Node("minimal_subscriber") {
     subscription_ = this->create_subscription<std_msgs::msg::String>(
-        "topic", 10, std::bind(&MinimalSubscriber::topic_callback, this, _1));
+        "chatter", 10, std::bind(&MinimalSubscriber::topic_callback, this, _1));
   }
 
  private:
@@ -53,9 +54,9 @@ class MinimalSubscriber : public rclcpp::Node {
 int main(int argc, char* argv[]) {
   rclcpp::init(argc, argv);
   RCLCPP_WARN_ONCE(rclcpp::get_logger("rclcpp"),
-                            "Warning! this is from subscriber main function!");
+                   "Warning! this is from subscriber main function!");
   RCLCPP_ERROR_ONCE(rclcpp::get_logger("rclcpp"),
-                                    "This is a DUMMY ERROR! No need to panic!");
+                    "This is a DUMMY ERROR! No need to panic!");
   rclcpp::spin(std::make_shared<MinimalSubscriber>());
   rclcpp::shutdown();
   return 0;

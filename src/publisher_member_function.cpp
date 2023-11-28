@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 /**
  * @file publisher_member_function.cpp
  * @author Mudit Singal (muditsingal@gmail.com)
@@ -24,14 +23,14 @@
  *
  */
 #include <chrono>
+#include <fstream>
 #include <functional>
 #include <memory>
 #include <string>
-#include <fstream>
 
+#include "geometry_msgs/msg/transform_stamped.hpp"
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
-#include "geometry_msgs/msg/transform_stamped.hpp"
 #include "tf2/LinearMath/Quaternion.h"
 #include "tf2_ros/transform_broadcaster.h"
 
@@ -43,7 +42,7 @@ using namespace std::chrono_literals;
 class MinimalPublisher : public rclcpp::Node {
  public:
   MinimalPublisher() : Node("minimal_publisher"), count_(0) {
-    publisher_ = this->create_publisher<std_msgs::msg::String>("topic", 10);
+    publisher_ = this->create_publisher<std_msgs::msg::String>("chatter", 10);
     tf_broadcaster_ = std::make_unique<tf2_ros::TransformBroadcaster>(*this);
     timer_ = this->create_wall_timer(
         500ms, std::bind(&MinimalPublisher::timer_callback, this));
@@ -58,16 +57,16 @@ class MinimalPublisher : public rclcpp::Node {
     geometry_msgs::msg::TransformStamped t;
 
     if (in_file.is_open()) {
-        std::string read_file_string((std::istreambuf_iterator<char>
-                          (in_file)), std::istreambuf_iterator<char>());
+      std::string read_file_string((std::istreambuf_iterator<char>(in_file)),
+                                   std::istreambuf_iterator<char>());
 
-        // Close the file
-        file_contents = read_file_string;
-        in_file.close();
+      // Close the file
+      file_contents = read_file_string;
+      in_file.close();
     } else {
-        RCLCPP_FATAL_STREAM(rclcpp::get_logger("rclcpp"),
-                                                    "Error opening the file!");
-        return;
+      RCLCPP_FATAL_STREAM(rclcpp::get_logger("rclcpp"),
+                          "Error opening the file!");
+      return;
     }
     auto message = std_msgs::msg::String();
     message.data = "Now printing from file contents: " + file_contents +
@@ -83,7 +82,6 @@ class MinimalPublisher : public rclcpp::Node {
     t.transform.translation.x = 1.5;
     t.transform.translation.y = 0.6;
     t.transform.translation.z = 0.0;
-
 
     tf2::Quaternion q;
     q.setRPY(0, 0, 1.57);
